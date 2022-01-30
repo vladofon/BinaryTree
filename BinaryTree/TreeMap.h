@@ -58,29 +58,38 @@ public:
 
       Node* parent = toDelete->parent;
 
-      bool isLeft = (parent->hash > toDelete->hash) ? true : false;
+      bool isLeft;
+
+      if (parent != nullptr)
+         isLeft = (parent->hash > toDelete->hash) ? true : false;
 
       if (toDelete != nullptr)
       {
-         if (toDelete->pLeft != nullptr && toDelete->pRight != nullptr)
+         if (parent == nullptr)
          {
-            Node* newNode = toDelete->pRight;
-            Node* lowerBranch = toDelete->pLeft;
+            Node* newNode = merge(toDelete->pLeft, toDelete->pRight);
+            newNode->parent = nullptr;
 
-            Node* lastLeft = findLastLeft(newNode);
-            lastLeft->pLeft = lowerBranch;
+            root = newNode;
+         }
+         else if (toDelete->pLeft != nullptr && toDelete->pRight != nullptr)
+         {
+            Node* newNode = merge(toDelete->pLeft, toDelete->pRight);
+            newNode->parent = parent;
 
             parent->add(newNode);
          }
          else if (toDelete->pLeft != nullptr)
          {
             Node* newNode = toDelete->pLeft;
+            newNode->parent = parent;
 
             parent->add(newNode);
          }
          else if (toDelete->pRight != nullptr)
          {
             Node* newNode = toDelete->pRight;
+            newNode->parent = parent;
 
             parent->add(newNode);
          }
@@ -178,5 +187,13 @@ private:
       }
 
       return node;
+   }
+
+   Node* merge(Node* left, Node* right)
+   {
+      Node* lastLeft = findLastLeft(right);
+      lastLeft->pLeft = left;
+
+      return right;
    }
 };

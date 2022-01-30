@@ -73,6 +73,9 @@ int main()
    map->remove(Long(23));
    map->remove(Long(22));
    map->remove(Long(11));
+   map->remove(Long(12));
+   map->remove(Long(13));
+   map->remove(Long(14));
    map->remove(Long(10));
 
    for (long i = 10; i < 25; i++)
