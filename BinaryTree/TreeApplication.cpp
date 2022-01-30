@@ -58,13 +58,27 @@ int main()
    map->insert(Long(17), Long(56787));
    map->insert(Long(18), Long(2656));
    map->insert(Long(19), Long(565678));
-   map->insert(Long(20), Long(23453654630));
-   map->insert(Long(30), Long(678967));
-   map->insert(Long(40), Long(47844444444));
-   map->insert(Long(50), Long(5678576));
-   map->insert(Long(60), Long(2678560));
+   map->insert(Long(20), Long(23453654));
+   map->insert(Long(21), Long(678967));
+   map->insert(Long(22), Long(47844444));
+   map->insert(Long(23), Long(5678576));
+   map->insert(Long(24), Long(2678560));
 
-   cout << map->find(Long(60)).data << endl;
+   for (long i = 10; i < 25; i++)
+   {
+      cout << map->find(Long(i)).data << endl;
+   }
+
+   cout << "______________________________" << endl;
+   map->remove(Long(23));
+   map->remove(Long(22));
+   map->remove(Long(11));
+   map->remove(Long(10));
+
+   for (long i = 10; i < 25; i++)
+   {
+      cout << map->find(Long(i)).data << endl;
+   }
 
    return 0;
 }
